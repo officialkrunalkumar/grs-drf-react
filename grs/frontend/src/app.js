@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
 import { Complaint } from "./components/Home";
 import Createcomplaint from './components/forms/createcomplaint';
@@ -10,7 +10,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 
 function App() {
-  const [complaints, setComplaints] = useState(data);
+  const [complaints, setComplaints] = useState([]);
   useEffect(()=>{
     loadComplaints();
   },[])
@@ -29,8 +29,9 @@ function App() {
   }
 
   const deleteComplaint = async id => {
-    await axios.delete('http://127.0.0.1:8000/complaints/complaint/${id}')
-  } setComplaints(complaints.filter(complaint => complaint.id!==id));
+    await axios.delete(`http://127.0.0.1:8000/complaints/complaint/${id}`);
+    loadComplaints();
+  }
 
   return (
     <>
