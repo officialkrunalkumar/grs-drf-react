@@ -1,4 +1,4 @@
-from .serializers import ComplaintSerializer
+from .serializer import ComplaintSerializer
 from rest_framework import viewsets
 from .models import Complaint
 from django.shortcuts import render

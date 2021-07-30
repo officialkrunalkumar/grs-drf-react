@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {data} from './components/data';
+import axios from 'axios';
 import { Complaint } from "./components/Home";
 import Createcomplaint from './components/forms/createcomplaint';
 import EditComplaint from './components/forms/editcomplaint';
@@ -11,7 +11,14 @@ import Signup from "./components/Signup";
 
 function App() {
   const [complaints, setComplaints] = useState(data);
+  useEffect(()=>{
+    loadComplaints();
+  },[])
 
+  const loadComplaints = async () => {
+    const complaintdata = await axios.get('http://127.0.0.1:8000/complaints/complaint')
+    setComplaints(complaintdata.data)
+  }
   const updateComplaint = (newComplaint, currentComplaint) => {
     setComplaints(complaints.map(complaint => (complaint.id === currentComplaint.id ? newComplaint : complaint)))
   }
@@ -21,7 +28,9 @@ function App() {
     setComplaints([...complaints, complaint]);
   }
 
-  const deleteComplaint = id => setComplaints(complaints.filter(complaint => complaint.id!==id));
+  const deleteComplaint = async id => {
+    await axios.delete('http://127.0.0.1:8000/complaints/complaint/${id}')
+  } setComplaints(complaints.filter(complaint => complaint.id!==id));
 
   return (
     <>

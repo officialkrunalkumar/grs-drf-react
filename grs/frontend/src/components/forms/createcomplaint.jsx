@@ -4,6 +4,7 @@ import NavbarBase from '../NavbarBase';
 import '../../static/main.css';
 import Footer from '../footer';
 import { useHistory } from "react-router-dom";
+import axios from 'axios';
 
 const Createcomplaint = (props) => {
     const initComplaint = {
@@ -26,11 +27,11 @@ const Createcomplaint = (props) => {
         setComplaint({...complaint, [name]: value});
     }
 
-    const handleSubmit = e => {
-        console.log('handle cliked');
+    const handleSubmit = async e => {
         e.preventDefault();
         if (complaint.title && complaint.name && complaint.description && complaint.complaint_for && complaint.complaint_to && complaint.level && complaint.category && complaint.cohort && complaint.user_role) {
            handleChange(e);
+           axios.post('http://127.0.0.1/complaints/complaint/',complaint)
            props.createComplaint(complaint);
            let path = `/complaint`;
            history.push(path);

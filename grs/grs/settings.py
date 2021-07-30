@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'grs.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'grsdrf',
+        'NAME': 'grsdrfreact',
         'USER': 'krunalkumar',
         'PASSWORD': 'kdshah',
         'HOST': '127.0.0.1',
