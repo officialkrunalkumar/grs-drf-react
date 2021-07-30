@@ -30,7 +30,7 @@ const Createcomplaint = (props) => {
         e.preventDefault();
         if (complaint.title && complaint.name && complaint.description && complaint.complaint_for && complaint.complaint_to && complaint.level && complaint.category && complaint.cohort && complaint.user_role) {
            handleChange(e);
-           await axios.post('http://127.0.0.1/complaints/complaint/',complaint);
+           await axios.post('http://127.0.0.1:8000/complaints/complaint/',complaint);
            props.createComplaint(complaint);
            let path = `/complaint`;
            history.push(path);
