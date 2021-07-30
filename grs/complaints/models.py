@@ -7,6 +7,7 @@ class Complaint(models.Model):
     """
     This is the basic database for storing complaints.
     """
+    id = models.AutoField(primary_key=True) 
     title = models.CharField(max_length=200)
     name = models.CharField(max_length=255, blank=True)
     user_type = (
@@ -73,14 +74,6 @@ class Complaint(models.Model):
         choices=complaint_category,
         default='I',
     )
-    complaint_status = (
-        ('P', 'Pending'),
-        ('N', 'Need Clarification'),
-        ('R', 'Resolved'),
-    )
-    status = models.CharField(
-        max_length=1,
-        choices=complaint_status,
-        default='P',
-    )
-    resoultion = models.TextField(blank=True, max_length=500)
+
+    def __str__(self):
+        return f'Blog {self.id, self.title}'
