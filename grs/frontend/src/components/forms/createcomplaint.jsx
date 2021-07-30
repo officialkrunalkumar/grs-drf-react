@@ -8,7 +8,6 @@ import axios from 'axios';
 
 const Createcomplaint = (props) => {
     const initComplaint = {
-        id: null,
         title: "",
         name: "",
         complaint_for: "",
@@ -19,7 +18,7 @@ const Createcomplaint = (props) => {
         category: "",
         user_role: ""
     }
-    const history = useHistory();
+    let history = useHistory();
     const [complaint, setComplaint] = useState(initComplaint);
 
     const handleChange = e => {
@@ -31,7 +30,7 @@ const Createcomplaint = (props) => {
         e.preventDefault();
         if (complaint.title && complaint.name && complaint.description && complaint.complaint_for && complaint.complaint_to && complaint.level && complaint.category && complaint.cohort && complaint.user_role) {
            handleChange(e);
-           axios.post('http://127.0.0.1/complaints/complaint/',complaint)
+           await axios.post('http://127.0.0.1/complaints/complaint/',complaint);
            props.createComplaint(complaint);
            let path = `/complaint`;
            history.push(path);
@@ -107,7 +106,7 @@ const Createcomplaint = (props) => {
                         <Form.Control as="option" value="G">General</Form.Control>
                     </Form.Control>
                 </Form.Group>
-                <Form.Group controlId="textarea" className="mb-3">
+                <Form.Group controlId="description" className="mb-3">
                     <Form.Label>Description</Form.Label>
                     <Form.Control as="textarea" name="description" value={complaint.description} placeholder="Describe Your Complaint" rows={3} onChange={handleChange} />
                     <p id="valid" className="text-right"></p>

@@ -76,4 +76,4 @@ class Complaint(models.Model):
     )
 
     def __str__(self):
-        return f'Blog {self.id, self.title}'
+        return f'Complaint {self.id, self.title}'

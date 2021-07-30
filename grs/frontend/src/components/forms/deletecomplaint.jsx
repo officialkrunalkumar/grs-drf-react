@@ -7,7 +7,7 @@ const Delete = () => {
     console.log(id);
     return (
         <div>
-            <Redirect exact to="/"/>
+            <Redirect exact to="/complaint"/>
         </div>
     )
 }

@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 
 def home(request):
-    return render(request, 'API/home.html')
+    return render(request, 'complaints/home.html')
 
 
 class ComplaintViewSet(viewsets.ModelViewSet):

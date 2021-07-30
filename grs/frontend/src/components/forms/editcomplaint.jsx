@@ -11,7 +11,6 @@ const EditComplaint = ({data, updateComplaint}) => {
     let history = useHistory();
     let complaintdata = '';
     const initComplaint = {
-        id: null,
         title: "",
         name: "",
         complaint_for: "",
@@ -24,21 +23,21 @@ const EditComplaint = ({data, updateComplaint}) => {
     }
     useEffect(()=>{
         loadComplaint();
-    })
-    const [complaint, setComplaint] = useState(initComplaint)
+    },[])
+    const [complaint, setComplaint] = useState(initComplaint);
     const loadComplaint = async () => {
         complaintdata = await axios.get(`http://127.0.0.1:8000/complaints/complaint/${id}`);
         setComplaint(complaintdata.data)
     }
     const handleChange = e => {
         const {name, value} = e.target;
-        setComplaint({...complaint, [name]:value})
+        setComplaint({...complaint, [name]:value});
     }
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
         if (complaint.title && complaint.name && complaint.description && complaint.complaint_for && complaint.complaint_to && complaint.level && complaint.category && complaint.cohort && complaint.user_role) {
             handleChange(e);
-            axios.put(`http://127.0.0.1:8000/complaints/complaint/${id}`, complaint)
+            await axios.put(`http://127.0.0.1:8000/complaints/complaint/${id}/`, complaint);
             updateComplaint(complaint, complaint);
             let path = `/complaint`;
             history.push(path);

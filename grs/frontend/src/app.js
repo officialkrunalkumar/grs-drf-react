@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { Complaint } from "./components/Home";
+import Complaint from "./components/Home";
 import Createcomplaint from './components/forms/createcomplaint';
 import EditComplaint from './components/forms/editcomplaint';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
@@ -16,15 +16,15 @@ function App() {
   },[])
 
   const loadComplaints = async () => {
-    const complaintdata = await axios.get('http://127.0.0.1:8000/complaints/complaint')
-    setComplaints(complaintdata.data)
+    const complaintdata = await axios.get('http://127.0.0.1:8000/complaints/complaint');
+    console.log(complaintdata);
+    setComplaints(complaintdata.data);
   }
   const updateComplaint = (newComplaint, currentComplaint) => {
     setComplaints(complaints.map(complaint => (complaint.id === currentComplaint.id ? newComplaint : complaint)))
   }
 
   const createComplaint = complaint => {
-    complaint.id = complaints.length+1;
     setComplaints([...complaints, complaint]);
   }
 
